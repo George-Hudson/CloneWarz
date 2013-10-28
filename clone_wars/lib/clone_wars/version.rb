@@ -1,3 +1,0 @@
-module CloneWars
-  VERSION = "0.0.1"
-end
