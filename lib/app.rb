@@ -1,5 +1,6 @@
 require 'bundler'
 Bundler.require
+require './lib/clone_warz'
 
 class CloneWarzApp < Sinatra::Base
   set :method_override, true
@@ -14,7 +15,9 @@ class CloneWarzApp < Sinatra::Base
   end
 
   get '/admin' do
-    erb :admin
+    #gather all pages in an array
+    #send them out
+    erb :admin, locals: { pages: Pages.all }
   end
 
 end
