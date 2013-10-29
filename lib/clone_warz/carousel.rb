@@ -5,12 +5,14 @@ class Carousel
 
   def initialize(data = {})
     @name = data[:name] || ""
-    @imgs = make_imgs(data[:imgs]) || []
+    @imgs = make_imgs(data[:imgs]) || [] 
   end
 
-  def make_imgs(data = [])
-    data.collect do |img_data|
-      CarouselImage.new(img_data)
+  def make_imgs(data)
+    unless data == nil
+      data.collect do |img_data|
+        CarouselImage.new(img_data)
+      end
     end
   end
 end

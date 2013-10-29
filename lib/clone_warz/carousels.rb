@@ -1,9 +1,11 @@
+require './lib/clone_warz/carousel'
+
 class Carousels
 
   def self.all
     [
-    'Home Page Carousel',
-    'About Us Carousel'
+    Carousel.new({name: 'Home Page Carousel'}),
+    Carousel.new({name: 'About Us Carousel'})
     ]
   end
 
