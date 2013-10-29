@@ -20,4 +20,10 @@ class CloneWarzApp < Sinatra::Base
     erb :admin, locals: { pages: Pages.all }
   end
 
+  get '/admin/carousels' do
+    #gather all carousels in an array
+    #send them out
+    erb :carousels, locals: { carousels: Carousels.all }
+  end
+
 end
