@@ -16,7 +16,7 @@ class CarouselTest < Minitest::Test
             ]
     }
     assert_equal data[:name], Carousel.new(data).name
-    assert_equal 3, Carousel.new(data).imgs.count
+    assert_equal data[:imgs].to_json, Carousel.new(data).imgs
   end
 
   def test_it_will_make_individual_images
@@ -29,9 +29,9 @@ class CarouselTest < Minitest::Test
             ]
     }
     carousel = Carousel.new(data)
-    assert_equal data[:imgs][0][:url], carousel.imgs[0].url
-    assert_equal data[:imgs][1][:url], carousel.imgs[1].url
-    assert_equal data[:imgs][2][:url], carousel.imgs[2].url
+    assert_equal data[:imgs][0][:url], carousel.get_imgs[0].url
+    assert_equal data[:imgs][1][:url], carousel.get_imgs[1].url
+    assert_equal data[:imgs][2][:url], carousel.get_imgs[2].url
   end
 
 end

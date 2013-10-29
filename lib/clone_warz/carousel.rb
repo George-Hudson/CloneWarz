@@ -1,18 +1,18 @@
 require './lib/clone_warz/carousel_image'
+require 'json'
 
 class Carousel
   attr_reader :name, :imgs
 
   def initialize(data = {})
     @name = data[:name] || ""
-    @imgs = make_imgs(data[:imgs]) || [] 
+    @imgs = data[:imgs].to_json || "" 
   end
 
-  def make_imgs(data)
-    unless data == nil
-      data.collect do |img_data|
-        CarouselImage.new(img_data)
-      end
-    end
+
+  def get_imgs
+    JSON.parse(@imgs, {:symbolize_names => true}).map{|img|  
+      CarouselImage.new(img)}     
   end
+
 end
