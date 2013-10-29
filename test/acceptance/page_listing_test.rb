@@ -1,3 +1,5 @@
+ENV['RACK_ENV'] = 'test'
+
 require './test/test_helper'
 require 'bundler'
 Bundler.require
@@ -18,7 +20,14 @@ class PageListingTest < Minitest::Test
 
   def test_it_lists_all_pages
     visit '/admin'
-    assert page.must_have_content("All Pages"), "Page listing cannot be found"
-  end
+    assert page.has_content?("All Pages"), "Page listing cannot be found"
 
+    assert page.has_content?("Home"), "Home listing does appear"
+    assert page.has_content?("About"), "About listing does appear"
+    assert page.has_content?("Mission, Vision, and Values"), "Mission, Vision, and Values listing does appear"
+    assert page.has_content?("History"), "History listing does appear"
+    assert page.has_content?("Staff & Board"), "Staff & Board listing does appear"
+    assert page.has_content?("Contact & Hours"), "Contact & Hours listing does appear"
+    assert page.has_content?("Privacy Policy"), "Privacy Policy listing does appear"
+  end
 end
