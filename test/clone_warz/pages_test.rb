@@ -3,17 +3,19 @@ require './lib/clone_warz/pages'
 
 class PagesTest < Minitest::Test
 
+  def setup
+    Pages.create
+  end
+
   def test_it_exists
-    skip
     assert Pages
   end
 
   def teardown
-    DB.destroy
+    DB.destroy(:pages)
   end
 
   def test_all_returns_pages
-    skip
     pages = [
       Page.new({ title: "Home"}),
       Page.new({ title: "About"}),
@@ -27,16 +29,12 @@ class PagesTest < Minitest::Test
   end
 
   def test_it_creates_a_pages_table
-    skip
     schema = [[:id, {:allow_null=>false, :default=>nil, :primary_key=>true, :db_type=>"integer", :type=>:integer, :ruby_default=>nil}], [:title, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:url, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:heading, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:img, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:body, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:associated_carousel, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}]]
-    Pages.create
-
     assert Pages.database.table_exists?(:pages)
     assert_equal schema, Pages.database.schema(:pages)
   end
 
   def test_it_inserts_data
-    skip
     data = {
       title: "Home",
       url: "/",

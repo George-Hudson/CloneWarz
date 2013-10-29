@@ -11,9 +11,8 @@ class DB
     ENV['RACK_ENV'] || "development"
   end
 
-  def self.destroy
-    @database = nil
-    File.delete(file) if File.exists?(file)
+  def self.destroy(table)
+    database.drop_table?(table)
   end
 
   def self.file

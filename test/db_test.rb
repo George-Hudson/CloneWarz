@@ -8,7 +8,7 @@ class DBTest < Minitest::Test
   end
 
   def teardown
-    DB.destroy
+    DB.destroy(:test)
   end
 
   def test_it_exists
@@ -16,7 +16,12 @@ class DBTest < Minitest::Test
   end
 
   def test_it_creates_a_new_database
-    refute File.exists?(@file)
+    begin
+      DB.database.dataset.from(:test)
+    rescue
+      assert_raises( "no such table" )
+    end
+
     db = DB.database
     db.create_table :test do
       primary_key :id
@@ -27,6 +32,7 @@ class DBTest < Minitest::Test
       String :body
       String :associated_carousel
     end
-    assert File.exists?(@file)
+    assert DB.database.table_exists? :test
+
   end
 end

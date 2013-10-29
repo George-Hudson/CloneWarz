@@ -21,5 +21,3 @@ class PageTest < Minitest::Test
     assert_equal data[:body], Page.new(data).body
   end
 end
-
-
