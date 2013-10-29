@@ -1,6 +1,7 @@
 require './lib/clone_warz/page'
+require './lib/db'
 
-class Pages
+class Pages < DB
 
   def self.all
     [

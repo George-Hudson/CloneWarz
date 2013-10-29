@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-contrib', require: 'sinatra/reloader'
+gem 'sequel'
 
 group :test do
   gem 'minitest', require: false
@@ -9,4 +10,5 @@ group :test do
   gem 'capybara', require: false
   gem 'minitest-capybara', require: false
   gem 'pry'
+  gem 'sqlite3'
 end
