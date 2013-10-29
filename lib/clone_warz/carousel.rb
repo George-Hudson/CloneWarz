@@ -6,13 +6,6 @@ class Carousel
 
   def initialize(data = {})
     @name = data[:name] || ""
-    @imgs = data[:imgs].to_json || "" 
+    @imgs = data[:imgs] || []
   end
-
-
-  def get_imgs
-    JSON.parse(@imgs, {:symbolize_names => true}).map{|img|  
-      CarouselImage.new(img)}     
-  end
-
 end

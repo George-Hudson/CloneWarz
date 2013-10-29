@@ -26,10 +26,27 @@ class CarouselsTest < Minitest::Test
              {url: "/carousel_images/bike_collection.jpg", title: "Organize a Bike Collection Drive", alt_tag: "Organize a Bike Collection Drive"}
             ]
     }
-    expected_data = data.merge(id: 1)
+    new_carousel = Carousel.new(data)
     Carousels.create
-    Carousels.table.insert(data)
-    assert_equal expected_data, Carousels.table.select.to_a.first
+    assert_equal 0, Carousels.count
+    Carousels.insert(new_carousel)
+    assert_equal 1, Carousels.count
+  end
+
+  def test_it_gets_data
+    data = {
+      name: "About Us Carousel",
+      imgs: [
+             {url: "/carousel_images/staff.jpg", title: "Bike Depot Staff", alt_tag: "Bike Depot Staff"},
+             {url: "/carousel_images/community_programs.jpg", title: "Bike Depot Community Programs", alt_tag: "Bike Depot Community Programs"},
+             {url: "/carousel_images/bike_collection.jpg", title: "Organize a Bike Collection Drive", alt_tag: "Organize a Bike Collection Drive"}
+            ]
+    }
+    new_carousel = Carousel.new(data)
+    Carousels.create
+    Carousels.insert(new_carousel)
+    assert_equal new_carousel.name, Carousels.all.first.name
+    assert_equal new_carousel.imgs, Carousels.all.first.imgs
   end
 
 end

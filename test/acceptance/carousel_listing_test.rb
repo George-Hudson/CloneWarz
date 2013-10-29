@@ -18,7 +18,28 @@ end
 class CarouselListingTest < Minitest::Test
   include Capybara::DSL
 
+  def setup
+    Carousels.create
+  end
+
+  def teardown
+    DB.destroy(:carousels)
+  end
+
   def test_it_lists_all_carousels
+    data = {
+      name: "About Us Carousel",
+      imgs: [
+             {url: "/carousel_images/staff.jpg", title: "Bike Depot Staff", alt_tag: "Bike Depot Staff"},
+             {url: "/carousel_images/community_programs.jpg", title: "Bike Depot Community Programs", alt_tag: "Bike Depot Community Programs"},
+             {url: "/carousel_images/bike_collection.jpg", title: "Organize a Bike Collection Drive", alt_tags: "Organize a Bike Collection Drive"}
+            ]
+    }
+    Carousels.insert(Carousel.new(data))
+
+    data.merge!(name: "Home Page Carousel")
+    Carousels.insert(Carousel.new(data))
+
     visit '/admin/carousels'
     assert page.has_content?("All Carousels"), "No data for All Carousels"
     assert page.has_content?("Home Page Carousel"), "No data for  Home Page Carousels"
