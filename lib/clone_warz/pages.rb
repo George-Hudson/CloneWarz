@@ -20,7 +20,7 @@ class Pages < DB
   end
 
   def self.all
-    table.select.to_a
+    table.select.to_a.map { |data| Page.new(data) }
   end
 
 end

@@ -18,9 +18,39 @@ end
 class PageListingTest < Minitest::Test
   include Capybara::DSL
 
+  def setup
+    Pages.create
+  end
+
+  def teardown
+    DB.destroy(:pages)
+  end
+
   def test_it_lists_all_pages
-    skip
+    data = {
+      title: "Home",
+      url: "/",
+      heading: "Home",
+      img: "",
+      body: "Welcome to Denver Bike Depot!",
+      associated_carousel: ""
+    }
+    Pages.table.insert(data)
+    data.merge!({title: "About"})
+    Pages.table.insert(data)
+    data.merge!({title: "Mission, Vision, and Values"})
+    Pages.table.insert(data)
+    data.merge!({title: "History"})
+    Pages.table.insert(data)
+    data.merge!({title: "Staff & Board"})
+    Pages.table.insert(data)
+    data.merge!({title: "Contact & Hours"})
+    Pages.table.insert(data)
+    data.merge!({title: "Privacy Policy"})
+    Pages.table.insert(data)
+
     visit '/admin'
+
     assert page.has_content?("All Pages"), "Page listing cannot be found"
     assert page.has_content?("Home"), "Home listing does appear"
     assert page.has_content?("About"), "About listing does appear"

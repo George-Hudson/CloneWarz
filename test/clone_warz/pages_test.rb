@@ -16,7 +16,24 @@ class PagesTest < Minitest::Test
   end
 
   def test_all_returns_pages
-    pages = [
+    data = {
+      title: "Home",
+    }
+    Pages.table.insert(data)
+    data.merge!({title: "About"})
+    Pages.table.insert(data)
+    data.merge!({title: "Mission, Vision, and Values"})
+    Pages.table.insert(data)
+    data.merge!({title: "History"})
+    Pages.table.insert(data)
+    data.merge!({title: "Staff & Board"})
+    Pages.table.insert(data)
+    data.merge!({title: "Contact & Hours"})
+    Pages.table.insert(data)
+    data.merge!({title: "Privacy Policy"})
+    Pages.table.insert(data)
+
+    expected_pages = [
       Page.new({ title: "Home"}),
       Page.new({ title: "About"}),
       Page.new({ title: "Mission, Vision, and Values"}),
@@ -25,7 +42,10 @@ class PagesTest < Minitest::Test
       Page.new({ title: "Contact & Hours"}),
       Page.new({ title: "Privacy Policy"})
     ]
-    assert pages, Pages.all
+
+    Pages.all.zip(expected_pages).each do |pair|
+      assert_equal pair[0].title, pair[1].title
+    end
   end
 
   def test_it_creates_a_pages_table
