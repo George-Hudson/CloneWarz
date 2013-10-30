@@ -40,7 +40,6 @@ class Pages < DB
   end
 
   def self.find_by_url(url)
-    puts table.where(url: url).to_a.first.inspect
     Page.new(table.where(url: url).to_a.first)
   end
 

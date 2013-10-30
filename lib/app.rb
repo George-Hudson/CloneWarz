@@ -11,7 +11,7 @@ class CloneWarzApp < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    erb :page, locals: { content: get_content("") }
   end
 
   get '/admin' do
@@ -32,12 +32,12 @@ class CloneWarzApp < Sinatra::Base
 
   get '/:url' do
     @content = get_content(params[:url])
-    @content
+    erb :page, locals: { content: @content }
   end
 
   helpers do
     def get_content(url)
-      Pages.find_by_url(url).body
+      Pages.find_by_url("/#{url}").body
     end
   end
 

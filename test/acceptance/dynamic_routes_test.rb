@@ -8,6 +8,7 @@ require 'capybara'
 require 'capybara/dsl'
 
 require './lib/app'
+require './lib/sweeper'
 
 Capybara.app = CloneWarzApp
 
@@ -21,6 +22,7 @@ class DynamicRoutesTest < Minitest::Test
   def setup
     Pages.database
     Pages.create
+    Sweeper.new
   end
 
   def teardown
@@ -28,7 +30,6 @@ class DynamicRoutesTest < Minitest::Test
   end
 
   def test_it_goes_to_a_route
-    skip
     visit '/about'
     assert_equal page.status_code, 200
     assert page.has_content? "In short, Bikes Rule!"
