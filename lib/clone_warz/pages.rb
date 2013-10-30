@@ -40,7 +40,9 @@ class Pages < DB
   end
 
   def self.find_by_url(url)
-    Page.new(table.where(url: url).to_a.first)
+    selection = table.where(url: url).to_a
+    return Page.new(selection.first) unless selection.count == 0
+    return nil
   end
 
 end

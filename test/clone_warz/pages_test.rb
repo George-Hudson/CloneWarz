@@ -22,7 +22,7 @@ class PagesTest < Minitest::Test
     Pages.table.insert(data)
     data.merge!({title: "About"})
     Pages.table.insert(data)
-    data.merge!({title: "Mission, Vision, and Values"})
+    data.merge!({title: "Mission, Vision and Values"})
     Pages.table.insert(data)
     data.merge!({title: "History"})
     Pages.table.insert(data)
@@ -36,7 +36,7 @@ class PagesTest < Minitest::Test
     expected_pages = [
       Page.new({ title: "Home"}),
       Page.new({ title: "About"}),
-      Page.new({ title: "Mission, Vision, and Values"}),
+      Page.new({ title: "Mission, Vision and Values"}),
       Page.new({ title: "History"}),
       Page.new({ title: "Staff & Board"}),
       Page.new({ title: "Contact & Hours"}),
@@ -44,7 +44,7 @@ class PagesTest < Minitest::Test
     ]
 
     Pages.all.zip(expected_pages).each do |pair|
-      assert_equal pair[0].title, pair[1].title
+      assert_equal pair[1].title, pair[0].title
     end
   end
 
@@ -94,7 +94,7 @@ class PagesTest < Minitest::Test
     Pages.table.insert(data)
     data.merge!({title: "About", url: "/about"})
     Pages.table.insert(data)
-    data.merge!({title: "Mission, Vision, and Values", url:"/mission"})
+    data.merge!({title: "Mission, Vision and Values", url:"/mission"})
     Pages.table.insert(data)
     data.merge!({title: "History", url: "/history"})
     Pages.table.insert(data)
@@ -105,6 +105,27 @@ class PagesTest < Minitest::Test
     data.merge!({title: "Privacy Policy", url: "/privacy"})
     Pages.table.insert(data)
     assert_equal "Staff & Board", Pages.find_by_url("/staff").title
+  end
+
+  def test_it_rejects_invalid_urls
+    data = {
+      title: "Home",
+      url: "/home"
+    }
+    Pages.table.insert(data)
+    data.merge!({title: "About", url: "/about"})
+    Pages.table.insert(data)
+    data.merge!({title: "Mission, Vision and Values", url:"/mission"})
+    Pages.table.insert(data)
+    data.merge!({title: "History", url: "/history"})
+    Pages.table.insert(data)
+    data.merge!({title: "Staff & Board", url: "/staff"})
+    Pages.table.insert(data)
+    data.merge!({title: "Contact & Hours", url: '/contact'})
+    Pages.table.insert(data)
+    data.merge!({title: "Privacy Policy", url: "/privacy"})
+    Pages.table.insert(data)
+    assert_equal nil, Pages.find_by_url("/gobblygook")
   end
 
 end

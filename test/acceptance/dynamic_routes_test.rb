@@ -20,6 +20,7 @@ class DynamicRoutesTest < Minitest::Test
   include Capybara::DSL
 
   def setup
+    skip
     Pages.database
     Pages.create
     Sweeper.new
@@ -30,6 +31,7 @@ class DynamicRoutesTest < Minitest::Test
   end
 
   def test_it_goes_to_a_route
+    skip
     visit '/about'
     assert_equal page.status_code, 200
     assert page.has_content? "In short, Bikes Rule!"
