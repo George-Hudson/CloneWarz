@@ -1,5 +1,5 @@
 class Page
-  attr_reader :title, :url, :heading, :img, :body, :associated_carousel
+  attr_reader :title, :url, :heading, :img, :body, :carousel_id
 
   def initialize(data = {})
     @title = data[:title] || ""
@@ -7,6 +7,6 @@ class Page
     @heading = data[:heading] || ""
     @img = data[:img] || ""
     @body = data[:body] || ""
-    @associated_carousel = data[:associated_carousel] || ""
+    @carousel_id = data[:carousel_id] || nil
   end
 end
