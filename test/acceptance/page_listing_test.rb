@@ -63,11 +63,23 @@ class PageListingTest < Minitest::Test
 
     assert page.has_content?("About"), "About listing doesn't appear"
 
-    within("#page#{page.id}") do
+    test_page = Pages.find_by_url("/about")
+
+    within("#page#{test_page.id}") do
       find(".edit").click
     end
 
+    assert_equal 200, page.status_code
     assert page.has_content?("Edit the About page")
-  end
 
+    fill_in 'body', :with => 'New body.'
+    fill_in 'heading', :with => 'New heading.'
+    click_button 'Submit'
+
+    assert /New body./ =~ Pages.find_by_url("/about").body
+    assert /New heading./ =~ Pages.find_by_url("/about").heading
+
+    Pages.update(test_page)
+
+  end
 end

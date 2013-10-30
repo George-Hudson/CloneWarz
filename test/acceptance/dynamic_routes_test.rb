@@ -1,4 +1,3 @@
-ENV['RACK_ENV'] = 'test-db'
 
 require './test/test_helper'
 require 'bundler'
@@ -24,8 +23,7 @@ class DynamicRoutesTest < Minitest::Test
   end
 
   def test_it_goes_to_a_dynamic_route
-    visit '/programs'
-    puts page.text
+    visit '/about'
     assert_equal 200, page.status_code
     assert page.has_content? "In short, Bikes Rule!"
   end

@@ -26,9 +26,9 @@ class CloneWarzApp < Sinatra::Base
     erb :carousels, locals: { carousels: Carousels.all }
   end
 
-  # get '/about' do
-  #   erb :page
-  # end
+  get '/admin/edit/:id' do
+    erb :edit, locals: { page: Pages.find_by_id(params[:id]) }
+  end
 
   get '/*' do
     @page = get_page(params[:splat].first)
@@ -40,7 +40,6 @@ class CloneWarzApp < Sinatra::Base
     def get_page(url)
       Pages.find_by_url("/#{url}")
     end
-
   end
 
 end
