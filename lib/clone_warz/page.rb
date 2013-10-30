@@ -7,6 +7,6 @@ class Page
     @heading = data[:heading] || ""
     @img = data[:img] || ""
     @body = data[:body] || ""
-    @carousel_id = data[:carousel_id] || nil
+    @carousel_id = data[:carousel_id] || 0
   end
 end

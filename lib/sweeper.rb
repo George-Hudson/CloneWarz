@@ -3,9 +3,11 @@ require 'open-uri'
 require './lib/clone_warz'
 
 class Sweeper
-  attr_reader :links, :page, :contents
+  attr_reader :links, :page, :contents, :db
 
   def initialize(url = default_url)
+    @db = Pages.database
+    Pages.create
     @page = Nokogiri::HTML(open(url))
     @contents = wanted_content
     puts "initialized"
@@ -42,3 +44,5 @@ class Sweeper
   end
 
 end
+
+#Sweeper.new
