@@ -26,4 +26,19 @@ class CloneWarzApp < Sinatra::Base
     erb :carousels, locals: { carousels: Carousels.all }
   end
 
+  # get '/about' do
+  #   erb :page
+  # end
+
+  get '/:url' do
+    @content = get_content(params[:url])
+    @content
+  end
+
+  helpers do
+    def get_content(url)
+      Pages.find_by_url(url).body
+    end
+  end
+
 end
