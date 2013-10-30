@@ -51,4 +51,9 @@ class Pages < DB
     return nil
   end
 
+  def self.update(page)
+    return nil unless Pages.find_by_id(page.id)
+    Pages.table.where(id: page.id).update(page.to_h) 
+  end
+
 end

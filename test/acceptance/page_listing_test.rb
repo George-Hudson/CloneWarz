@@ -76,8 +76,8 @@ class PageListingTest < Minitest::Test
     fill_in 'heading', :with => 'New heading.'
     click_button 'Submit'
 
-    assert /New body./ =~ Pages.find_by_url("/about").body
-    assert /New heading./ =~ Pages.find_by_url("/about").heading
+    assert /New body./ =~ Pages.find_by_id(test_page.id).body
+    assert /New heading./ =~ Pages.find_by_id(test_page.id).heading
 
     Pages.update(test_page)
 

@@ -1,7 +1,12 @@
 Edit the <%= page.heading %> page
 
-<form action="" method='POST'>
-  <input type="input" name="heading" value="<%= page.heading %>">
+<form action="/admin/edit/<%= page.id %>" method='POST'>
+	<input type="hidden" name="_method" value="PUT">
+	<input type="hidden" name="url" value="<%= page.url %>">
+	<input type="hidden" name="img" value="<%= page.img %>">
+	<input type="hidden" name="carousel_id" value="<%= page.carousel_id %>">
+	<input type="text" name="title" value="<%= page.title %>">
+  <input type="text" name="heading" value="<%= page.heading %>">
   <textarea name="body"><%= page.body %></textarea>
   <input type="submit" value="Submit">
 </form>

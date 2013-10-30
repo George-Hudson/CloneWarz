@@ -155,13 +155,24 @@ class PagesTest < Minitest::Test
   def test_it_updates
     data = {
       title: "Home",
-      url: "/home"
+      url: "/home",
+      body: "This is a Haiku"
     }
-    Pages.table.insert(data)
-    assert_equal "/home", Pages.find_by_id(1).url
-    data.merge!({title: "About", url: "/about"})
-    Pages.table.insert(data)
-    assert_equal "/about", Pages.find_by_id(2).url
+    id = Pages.insert(Page.new(data))
+    test_page = Pages.find_by_id(id)
+    assert_equal "This is a Haiku", test_page.body
+    data = {
+      title: "Haikuhome",
+      url: "/haiku",
+      body: "This is a better Haiku"
+    }
+    test_page.edit(data)
+    Pages.update(test_page)
+    assert_equal "This is a better Haiku", test_page.body
+    assert_equal id, test_page.id
+    assert_equal "Haikuhome", test_page.title
+    assert_equal "/haiku", test_page.url
+
   end
 
 end

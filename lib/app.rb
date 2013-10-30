@@ -30,6 +30,22 @@ class CloneWarzApp < Sinatra::Base
     erb :edit, locals: { page: Pages.find_by_id(params[:id]) }
   end
 
+  put '/admin/edit/:id' do |id|
+    target_page = Pages.find_by_id(id)
+    #grab new page values
+    data = {
+      id: id,
+      title: params[:title],
+      url: params[:url],
+      heading: params[:heading],
+      img: params[:img],
+      body: params[:body],
+      carousel_id: params[:carousel_id]
+    }
+    #update in db
+    Pages.update(target_page.edit(data))
+  end
+
   get '/*' do
     @page = get_page(params[:splat].first)
     raise not_found unless @page
