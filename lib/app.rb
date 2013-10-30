@@ -11,7 +11,7 @@ class CloneWarzApp < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    erb :page, locals: { content: get_content("") }
   end
 
   get '/admin' do
@@ -24,6 +24,21 @@ class CloneWarzApp < Sinatra::Base
     #gather all carousels in an array
     #send them out
     erb :carousels, locals: { carousels: Carousels.all }
+  end
+
+  # get '/about' do
+  #   erb :page
+  # end
+
+  get '/:url' do
+    @content = get_content(params[:url])
+    erb :page, locals: { content: @content }
+  end
+
+  helpers do
+    def get_content(url)
+      Pages.find_by_url("/#{url}").body
+    end
   end
 
 end

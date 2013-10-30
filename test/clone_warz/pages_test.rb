@@ -86,4 +86,25 @@ class PagesTest < Minitest::Test
     assert_equal 4, Pages.all.count
   end
 
+  def test_it_finds_by_url
+    data = {
+      title: "Home",
+      url: "/home"
+    }
+    Pages.table.insert(data)
+    data.merge!({title: "About", url: "/about"})
+    Pages.table.insert(data)
+    data.merge!({title: "Mission, Vision, and Values", url:"/mission"})
+    Pages.table.insert(data)
+    data.merge!({title: "History", url: "/history"})
+    Pages.table.insert(data)
+    data.merge!({title: "Staff & Board", url: "/staff"})
+    Pages.table.insert(data)
+    data.merge!({title: "Contact & Hours", url: '/contact'})
+    Pages.table.insert(data)
+    data.merge!({title: "Privacy Policy", url: "/privacy"})
+    Pages.table.insert(data)
+    assert_equal "Staff & Board", Pages.find_by_url("/staff").title
+  end
+
 end

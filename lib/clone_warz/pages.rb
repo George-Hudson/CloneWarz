@@ -39,4 +39,8 @@ class Pages < DB
       })
   end
 
+  def self.find_by_url(url)
+    Page.new(table.where(url: url).to_a.first)
+  end
+
 end
