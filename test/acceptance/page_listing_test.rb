@@ -33,7 +33,7 @@ class PageListingTest < Minitest::Test
       heading: "Home",
       img: "",
       body: "Welcome to Denver Bike Depot!",
-      associated_carousel: ""
+      carousel_id: nil
     }
     Pages.table.insert(data)
     data.merge!({title: "About"})

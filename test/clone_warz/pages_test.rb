@@ -49,7 +49,7 @@ class PagesTest < Minitest::Test
   end
 
   def test_it_creates_a_pages_table
-    schema = [[:id, {:allow_null=>false, :default=>nil, :primary_key=>true, :db_type=>"integer", :type=>:integer, :ruby_default=>nil}], [:title, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:url, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:heading, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:img, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:body, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:associated_carousel, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}]]
+    schema = [[:id, {:allow_null=>false, :default=>nil, :primary_key=>true, :db_type=>"integer", :type=>:integer, :ruby_default=>nil}], [:title, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:url, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:heading, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:img, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:body, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"varchar(255)", :type=>:string, :ruby_default=>nil}], [:carousel_id, {:allow_null=>true, :default=>nil, :primary_key=>false, :db_type=>"integer", :type=>:integer, :ruby_default=>nil}]]
     assert Pages.database.table_exists?(:pages)
     assert_equal schema, Pages.database.schema(:pages)
   end
@@ -61,12 +61,12 @@ class PagesTest < Minitest::Test
       heading: "Home",
       img: "",
       body: "Welcome to Denver Bike Depot!",
-      associated_carousel: ""
+      carousel_id: nil
     }
-    expected_data = data.merge(id: 1)
-    Pages.create
-    Pages.table.insert(data)
-    assert_equal expected_data, Pages.table.select.to_a.first
+    assert_equal 0, Pages.count
+
+    Pages.insert(Page.new(data))
+    assert_equal 1, Pages.count
   end
 
   def test_it_finds_all_records
@@ -76,7 +76,7 @@ class PagesTest < Minitest::Test
       heading: "Home",
       img: "",
       body: "Welcome to Denver Bike Depot!",
-      associated_carousel: ""
+      carousel_id: nil
     }
     Pages.create
     Pages.table.insert(data)
