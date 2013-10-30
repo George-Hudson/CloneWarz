@@ -128,4 +128,28 @@ class PagesTest < Minitest::Test
     assert_equal nil, Pages.find_by_url("/gobblygook")
   end
 
+  def test_insert_gives_correct_id
+    data = {
+      title: "Home",
+      url: "/home"
+    }
+    Pages.table.insert(data)
+    assert_equal 1, Pages.find_by_url("/home").id
+    data.merge!({title: "About", url: "/about"})
+    Pages.table.insert(data)
+    assert_equal 2, Pages.find_by_url("/about").id
+  end
+
+  def test_it_finds_by_id
+    data = {
+      title: "Home",
+      url: "/home"
+    }
+    Pages.table.insert(data)
+    assert_equal "/home", Pages.find_by_id(1).url
+    data.merge!({title: "About", url: "/about"})
+    Pages.table.insert(data)
+    assert_equal "/about", Pages.find_by_id(2).url
+  end
+
 end

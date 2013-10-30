@@ -8,6 +8,7 @@ class PageTest < Minitest::Test
 
   def test_it_initializes
     data = {
+      id: 1,
       title: "About",
       url: "/about",
       heading: "About",
@@ -19,5 +20,6 @@ class PageTest < Minitest::Test
     assert_equal data[:url], Page.new(data).url
     assert_equal data[:heading], Page.new(data).heading
     assert_equal data[:body], Page.new(data).body
+    assert_equal data[:id], Page.new(data).id
   end
 end

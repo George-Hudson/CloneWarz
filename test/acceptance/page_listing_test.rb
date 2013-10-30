@@ -8,7 +8,6 @@ require 'capybara'
 require 'capybara/dsl'
 
 require './lib/app'
-require './lib/sweeper'
 
 Capybara.app = CloneWarzApp
 
@@ -22,10 +21,6 @@ class PageListingTest < Minitest::Test
   def setup
     Pages.database
     Pages.create
-    Sweeper.new
-  end
-
-  def teardown
   end
 
   def test_it_lists_all_pages
@@ -68,10 +63,8 @@ class PageListingTest < Minitest::Test
 
     assert page.has_content?("About"), "About listing doesn't appear"
 
-    page = Pages.find_by_url("/about")
-
     within("#page#{page.id}") do
-      click_button 'Edit'
+      find(".edit").click
     end
 
     assert page.has_content?("Edit the About page")

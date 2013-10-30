@@ -45,4 +45,10 @@ class Pages < DB
     return nil
   end
 
+  def self.find_by_id(id)
+    selection = table.where(id: id).to_a
+    return Page.new(selection.first) unless selection.count == 0
+    return nil
+  end
+
 end
