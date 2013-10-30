@@ -30,15 +30,17 @@ class CloneWarzApp < Sinatra::Base
   #   erb :page
   # end
 
-  get '/:url' do
-    @content = get_content(params[:url])
-    erb :page, locals: { content: @content }
+  get '/*' do
+    @page = get_page(params[:splat].first)
+    raise not_found unless @page
+    erb :page, locals: { page: @page }
   end
 
   helpers do
-    def get_content(url)
-      Pages.find_by_url("/#{url}").body
+    def get_page(url)
+      Pages.find_by_url("/#{url}")
     end
+
   end
 
 end

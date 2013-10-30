@@ -1,4 +1,4 @@
-ENV['RACK_ENV'] = 'test'
+ENV['RACK_ENV'] = 'test-db'
 
 require './test/test_helper'
 require 'bundler'
@@ -8,7 +8,6 @@ require 'capybara'
 require 'capybara/dsl'
 
 require './lib/app'
-require './lib/sweeper'
 
 Capybara.app = CloneWarzApp
 
@@ -22,16 +21,12 @@ class DynamicRoutesTest < Minitest::Test
   def setup
     Pages.database
     Pages.create
-    Sweeper.new
   end
 
-  def teardown
-    Pages.destroy(:pages)
-  end
-
-  def test_it_goes_to_a_route
-    visit '/about'
-    assert_equal page.status_code, 200
+  def test_it_goes_to_a_dynamic_route
+    visit '/programs'
+    puts page.text
+    assert_equal 200, page.status_code
     assert page.has_content? "In short, Bikes Rule!"
   end
 
