@@ -30,8 +30,8 @@ class CloneWarzApp < Sinatra::Base
   #   erb :page
   # end
 
-  get '/:url' do
-    @page = get_page(params[:url])
+  get '/*' do
+    @page = get_page(params[:splat].first)
     raise not_found unless @page
     erb :page, locals: { page: @page }
   end

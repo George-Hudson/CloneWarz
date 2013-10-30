@@ -8,7 +8,6 @@ require 'capybara'
 require 'capybara/dsl'
 
 require './lib/app'
-require './lib/sweeper'
 
 Capybara.app = CloneWarzApp
 
@@ -24,8 +23,9 @@ class DynamicRoutesTest < Minitest::Test
     Pages.create
   end
 
-  def test_it_goes_to_a_route
-    visit '/about'
+  def test_it_goes_to_a_dynamic_route
+    visit '/programs'
+    puts page.text
     assert_equal 200, page.status_code
     assert page.has_content? "In short, Bikes Rule!"
   end
