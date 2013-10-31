@@ -1,5 +1,6 @@
 require './lib/clone_warz/page'
 require './lib/db'
+require 'pry'
 
 class Pages < DB
 
@@ -52,8 +53,9 @@ class Pages < DB
   end
 
   def self.update(page)
+    #binding.pry
     return nil unless Pages.find_by_id(page.id)
-    Pages.table.where(id: page.id).update(page.to_h) 
+    Pages.table.where(id: page.id).update(page.to_h)
   end
 
 end

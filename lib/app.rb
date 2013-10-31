@@ -34,7 +34,7 @@ class CloneWarzApp < Sinatra::Base
     target_page = Pages.find_by_id(id)
     #grab new page values
     data = {
-      id: id,
+      id: id.to_i,
       title: params[:title],
       url: params[:url],
       heading: params[:heading],
@@ -43,7 +43,8 @@ class CloneWarzApp < Sinatra::Base
       carousel_id: params[:carousel_id]
     }
     #update in db
-    Pages.update(target_page.edit(data))
+    target_page.edit(data)
+    Pages.update(target_page)
   end
 
   get '/*' do
