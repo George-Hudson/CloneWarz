@@ -1,0 +1,45 @@
+.page {
+	font-weight: bold;
+}
+
+.edit {
+	color:red;
+	display:inline-block;
+	margin-left:5px;
+}
+
+.page-listing li {
+	margin-bottom:8px;
+}
+
+fieldset label {
+	display: block;
+	font-weight: bold;
+	font-size:14px;
+	margin-bottom:5px;
+}
+
+#edit input[type="text"] {
+	width:200px;
+	padding:5px;
+	margin-bottom: 10px;
+}
+
+#edit textarea {
+	width:95%;
+	height:500px;
+	padding:5px;
+}
+
+#edit input[type="submit"] {
+	display:block;
+	margin:20px 0;
+	width:100px;
+	height:40px;
+	padding:10px;
+	font-size:14px;
+	background:#1F75A7;
+	color:#fff;
+	border:0px;
+	border-radius:8px;
+}

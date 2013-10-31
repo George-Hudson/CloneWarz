@@ -1,13 +1,15 @@
-admin
+<h1>All Pages</h1>
 
-All Pages
-
+<ul class="page-listing">
 <% pages.each do |page| %>
 
-  <li id="page<%= page.id %>"><a href="<%= page.url %>"><%= page.title %></a>
-	<br>
-	<a href="/admin/edit/<%= page.id %>" class="edit">Edit</a>
+  <li id="page<%= page.id %>">
+  	<a href="<%= page.url %>" class="page"><%= page.title %></a> <a href="/admin/edit/<%= page.id %>" class="edit">[edit]</a>
   </li>
 
+<% end %>
 
-<%end%>
+</ul>
+
+
+

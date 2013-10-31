@@ -74,7 +74,7 @@ class PageListingTest < Minitest::Test
 
     fill_in 'body', :with => 'New body.'
     fill_in 'heading', :with => 'New heading.'
-    click_button 'Submit'
+    click_button 'Edit it!'
 
     assert /New body./ =~ Pages.find_by_id(test_page.id).body
     assert /New heading./ =~ Pages.find_by_id(test_page.id).heading

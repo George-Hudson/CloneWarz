@@ -1,12 +1,21 @@
-Edit the <%= page.heading %> page
+<h1>Edit the <%= page.heading %> page</h1>
 
-<form action="/admin/edit/<%= page.id %>" method='POST'>
+<form action="/admin/edit/<%= page.id %>" method='POST' id="edit">
 	<input type="hidden" name="_method" value="PUT">
 	<input type="hidden" name="url" value="<%= page.url %>">
 	<input type="hidden" name="img" value="<%= page.img %>">
 	<input type="hidden" name="carousel_id" value="<%= page.carousel_id %>">
-	<input type="text" name="title" value="<%= page.title %>">
-  <input type="text" name="heading" value="<%= page.heading %>">
-  <textarea name="body"><%= page.body %></textarea>
-  <input type="submit" value="Submit">
+	<fieldset>	
+		<label for="title">Title:</label>
+		<input type="text" name="title" value="<%= page.title %>">
+	</fieldset>
+	<fieldset>
+		<label for="heading">Heading:</label>
+		<input type="text" name="heading" value="<%= page.heading %>">
+	</fieldset>
+	<fieldset>
+		<label for="body">Body:</label>
+		<textarea name="body"><%= page.body %></textarea>
+	</fieldset>
+	<input type="submit" value="Edit it!" class="edit_page_submission">
 </form>
