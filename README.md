@@ -1,29 +1,20 @@
 # CloneWars
 
-TODO: Write a gem description
+A gSchool1 project based on the specifications found [here](http://tutorials.jumpstartlab.com/projects/clone_wars.html).
+A clone of the Bike Depot's website, with a custom CMS backend built
+in Ruby using Sinatra.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'clone_wars'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install clone_wars
+- Clone the project locally
+- Run `rackup`
+- Pay attention the the port. Rackup defaults to 9292
+- Load up <http://localhost:9292> to view the website
+- Edit the pages by visiting <http://localhost:9292/admin>
 
 ## Usage
 
-TODO: Write usage instructions here
+
+
 
 ## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
