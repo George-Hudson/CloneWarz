@@ -1,5 +1,6 @@
 require './lib/clone_warz/page'
 require './lib/db'
+require 'pry'
 
 class Pages < DB
 
@@ -40,7 +41,21 @@ class Pages < DB
   end
 
   def self.find_by_url(url)
-    Page.new(table.where(url: url).to_a.first)
+    selection = table.where(url: url).to_a
+    return Page.new(selection.first) unless selection.count == 0
+    return nil
+  end
+
+  def self.find_by_id(id)
+    selection = table.where(id: id).to_a
+    return Page.new(selection.first) unless selection.count == 0
+    return nil
+  end
+
+  def self.update(page)
+    #binding.pry
+    return nil unless Pages.find_by_id(page.id)
+    Pages.table.where(id: page.id).update(page.to_h)
   end
 
 end

@@ -26,18 +26,36 @@ class CloneWarzApp < Sinatra::Base
     erb :carousels, locals: { carousels: Carousels.all }
   end
 
-  # get '/about' do
-  #   erb :page
-  # end
+  get '/admin/edit/:id' do
+    erb :edit, locals: { page: Pages.find_by_id(params[:id]) }
+  end
 
-  get '/:url' do
-    @content = get_content(params[:url])
-    erb :page, locals: { content: @content }
+  put '/admin/edit/:id' do |id|
+    target_page = Pages.find_by_id(id)
+    #grab new page values
+    data = {
+      id: id.to_i,
+      title: params[:title],
+      url: params[:url],
+      heading: params[:heading],
+      img: params[:img],
+      body: params[:body],
+      carousel_id: params[:carousel_id]
+    }
+    #update in db
+    target_page.edit(data)
+    Pages.update(target_page)
+  end
+
+  get '/*' do
+    @page = get_page(params[:splat].first)
+    raise not_found unless @page
+    erb :page, locals: { page: @page }
   end
 
   helpers do
-    def get_content(url)
-      Pages.find_by_url("/#{url}").body
+    def get_page(url)
+      Pages.find_by_url("/#{url}")
     end
   end
 
