@@ -45,6 +45,7 @@ class CloneWarzApp < Sinatra::Base
     #update in db
     target_page.edit(data)
     Pages.update(target_page)
+    redirect '/admin'
   end
 
   get '/*' do
